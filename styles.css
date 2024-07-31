@@ -8,80 +8,79 @@ body {
     background-color: #f0f0f0;
 }
 
-#container {
-    text-align: center;
-    width: 80%;
-    max-width: 800px;
-}
-
 .page {
-    display: none;
-}
-
-.page.active {
-    display: block;
-}
-
-input[type="text"] {
-    padding: 10px;
-    font-size: 16px;
-    width: 100%;
-    margin-bottom: 20px;
-}
-
-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-#start-test {
-    background-color: #007bff;
-    color: white;
-}
-
-#finish-test {
-    background-color: #dc3545;
-    color: white;
-}
-
-#retry-test {
-    background-color: #28a745;
-    color: white;
-}
-
-#answers {
-    margin: 20px 0;
-}
-
-.answer {
-    font-size: 24px;
-    padding: 20px;
-    margin: 10px;
-    width: 60px;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
+    text-align: center;
 }
 
 .hidden {
     display: none;
 }
 
-#results-table {
+#start-page, #test-page, #results-page {
+    width: 80%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+input[type="text"] {
+    padding: 10px;
+    font-size: 16px;
+    margin: 20px 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 10px;
+    cursor: pointer;
+    border: none;
+    color: #fff;
+}
+
+#start-test {
+    background-color: #007bff;
+}
+
+#finish-test {
+    background-color: #dc3545;
+}
+
+.answer-btn {
+    background-color: #28a745;
+    width: 100px;
+    height: 50px;
+    font-size: 24px;
+}
+
+.answer-btn[data-value="0"] {
+    background-color: #007bff;
+}
+
+.answer-btn[data-value="1"] {
+    background-color: #28a745;
+}
+
+#warning {
+    color: #dc3545;
+    font-size: 12px;
+}
+
+#results-page table {
     width: 100%;
     border-collapse: collapse;
 }
 
-#results-table th, #results-table td {
+#results-page th, #results-page td {
+    padding: 10px;
     border: 1px solid #ddd;
-    padding: 8px;
-    text-align: center;
 }
 
-#results-table th {
-    background-color: #007bff;
-    color: white;
+#try-again {
+    background-color: #28a745;
+}
+
+#try-again, #finish-test {
+    margin-top: 20px;
 }
