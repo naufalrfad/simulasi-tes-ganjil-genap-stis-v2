@@ -20,9 +20,24 @@ document.addEventListener('DOMContentLoaded', () => {
     let questions = [];
     let sectionData = [];
 
-    function startTest() {
+    function showSection(section) {
         startPage.classList.add('hidden');
-        testPage.classList.remove('hidden');
+        testPage.classList.add('hidden');
+        resultsPage.classList.add('hidden');
+
+        if (section === 'start') {
+            startPage.classList.remove('hidden');
+        } else if (section === 'test') {
+            testPage.classList.remove('hidden');
+        } else if (section === 'results') {
+            resultsPage.classList.remove('hidden');
+        } else {
+            console.error('Unknown section:', section);
+        }
+    }
+
+    function startTest() {
+        showSection('test');
         resetTimer();
         loadQuestions();
         showQuestion();
@@ -30,8 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function finishTest() {
         clearInterval(timer);
-        testPage.classList.add('hidden');
-        resultsPage.classList.remove('hidden');
+        showSection('results');
         showResults();
     }
 
@@ -110,6 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     startTestButton.addEventListener('click', () => {
         if (fullNameInput.value.trim()) {
+            showSection('test');
             startTest();
         } else {
             alert('Harap isi nama lengkap.');
