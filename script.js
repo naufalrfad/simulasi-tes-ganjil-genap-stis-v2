@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentSection = 1;
     let timer;
     let score = Array(15).fill({correct: 0, incorrect: 0});
+    let questionData = {};
 
     function startTimer() {
         let timeLeft = 60;
@@ -34,25 +35,26 @@ document.addEventListener('DOMContentLoaded', () => {
         const a = Math.floor(Math.random() * 10);
         const b = Math.floor(Math.random() * 10);
         const correctAnswer = (a + b) % 2 === 0 ? 0 : 1;
+        questionData = {a, b, correctAnswer};
         document.getElementById('question').innerText = `${a} + ${b} = ?`;
         
         document.querySelectorAll('#answers .answer').forEach(button => {
             button.onclick = () => {
-                checkAnswer(button.dataset.value, correctAnswer);
+                checkAnswer(button.dataset.value);
                 loadQuestion();
             };
         });
 
         document.addEventListener('keydown', (e) => {
             if (e.key === '0' || e.key === '1') {
-                checkAnswer(e.key, correctAnswer);
+                checkAnswer(e.key);
                 loadQuestion();
             }
         });
     }
 
-    function checkAnswer(answer, correctAnswer) {
-        if (answer === correctAnswer.toString()) {
+    function checkAnswer(answer) {
+        if (answer === questionData.correctAnswer.toString()) {
             score[currentSection - 1].correct++;
         } else {
             score[currentSection - 1].incorrect++;
