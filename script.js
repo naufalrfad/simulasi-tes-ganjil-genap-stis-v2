@@ -18,12 +18,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function showSection(sectionId) {
-        // Hide all sections
         document.querySelectorAll('.section').forEach(section => {
             section.classList.remove('active');
         });
-
-        // Show the selected section
         document.getElementById(sectionId).classList.add('active');
     }
 
@@ -31,6 +28,8 @@ document.addEventListener('DOMContentLoaded', () => {
         showSection('testSection');
         startTimer();
         loadQuestion();
+        document.getElementById('nextSection').classList.remove('hidden');
+        document.getElementById('finishNow').classList.remove('hidden');
     }
 
     function showResultsSection() {
@@ -94,11 +93,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Initialize the page to show the name section first
     showSection('nameSection');
 
     document.getElementById('startTest').onclick = () => {
-        showTestSection();
+        showSection('testSection');
+        startTimer();
     };
 
     document.getElementById('finishNow').onclick = showResultsSection;
