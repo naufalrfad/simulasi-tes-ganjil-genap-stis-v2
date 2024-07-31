@@ -1,37 +1,68 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function () {
+    const startButton = document.getElementById('startButton');
+    const fullNameInput = document.getElementById('fullName');
+    const timerElement = document.getElementById('timer');
+    const questionElement = document.getElementById('question');
+    const sectionElement = document.getElementById('section');
+    const resultSection = document.getElementById('resultSection');
+    const resultsTable = document.getElementById('resultsTable');
+    const finishEarlyButton = document.getElementById('finishEarly');
+    const tryAgainButton = document.getElementById('tryAgain');
+
     let currentSection = 1;
     let currentQuestion = 0;
+    let currentSum;
     let timer;
-    const totalSections = 50;
+    const sectionsCount = 50;
     const questionsPerSection = 100;
-    let results = Array.from({ length: totalSections }, () => ({ correct: 0, incorrect: 0, total: 0 }));
+    const results = Array.from({ length: sectionsCount }, () => ({
+        correct: 0,
+        incorrect: 0,
+        total: 0,
+    }));
 
-    // Mengubah tampilan halaman
-    function showSection(sectionId) {
-        document.querySelectorAll('div.page').forEach(page => {
-            if (page.id === sectionId) {
-                page.classList.remove('hidden');
-            } else {
-                page.classList.add('hidden');
-            }
-        });
-    }
-
-    // Mulai tes
-    document.getElementById('start-test').addEventListener('click', () => {
-        showSection('test-page');
-        document.getElementById('section-number').textContent = `Bagian ${currentSection}`;
-        startTimer();
-        generateQuestion();
+    startButton.addEventListener('click', function () {
+        const fullName = fullNameInput.value.trim();
+        if (fullName) {
+            showSection('testSection');
+            startTest();
+        }
     });
 
-    // Timer
+    finishEarlyButton.addEventListener('click', function () {
+        showResults();
+    });
+
+    tryAgainButton.addEventListener('click', function () {
+        location.reload();
+    });
+
+    document.addEventListener('keydown', function (event) {
+        if (event.key === '0' || event.key === '1') {
+            checkAnswer(Number(event.key));
+        }
+    });
+
+    function showSection(sectionId) {
+        document.querySelectorAll('.section').forEach(section => {
+            section.classList.remove('active');
+        });
+        document.getElementById(sectionId).classList.add('active');
+    }
+
+    function startTest() {
+        currentSection = 1;
+        currentQuestion = 0;
+        startTimer();
+        generateQuestion();
+    }
+
     function startTimer() {
         let timeLeft = 60;
-        document.getElementById('timer-count').textContent = `Sisa waktu: ${timeLeft} detik`;
-        timer = setInterval(() => {
+        timerElement.textContent = `Sisa waktu: ${timeLeft} detik`;
+        timer = setInterval(function () {
             timeLeft--;
-            document.getElementById('timer-count').textContent = `Sisa waktu: ${timeLeft} detik`;
+            timerElement.textContent = `Sisa waktu: ${timeLeft} detik`;
             if (timeLeft <= 0) {
                 clearInterval(timer);
                 goToNextSection();
@@ -39,90 +70,65 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 1000);
     }
 
-    // Menangani klik jawaban
-    document.querySelectorAll('.answer-btn').forEach(button => {
-        button.addEventListener('click', () => {
-            const value = button.getAttribute('data-value');
-            checkAnswer(parseInt(value));
-            goToNextQuestion();
-        });
-    });
-
-    // Pergi ke soal berikutnya
     function goToNextQuestion() {
         currentQuestion++;
         if (currentQuestion < questionsPerSection) {
-            generateQuestion();
+            generateQuestion();  // Panggil generateQuestion di sini
         } else {
             goToNextSection();
         }
     }
 
-    // Pergi ke bagian berikutnya
     function goToNextSection() {
         currentSection++;
-        currentQuestion = 0;
-        if (currentSection <= totalSections) {
-            document.getElementById('section-number').textContent = `Bagian ${currentSection}`;
+        if (currentSection <= sectionsCount) {
+            currentQuestion = 0;
             startTimer();
             generateQuestion();
         } else {
-            showSection('results-page');
-            displayResults();
+            showResults();
         }
     }
 
-    // Memeriksa jawaban
+    function generateQuestion() {
+        const num1 = Math.floor(Math.random() * 10);
+        const num2 = Math.floor(Math.random() * 10);
+        currentSum = num1 + num2;  // Simpan sum ke currentSum
+        questionElement.textContent = `${num1} + ${num2} = ?`;
+        sectionElement.textContent = `Bagian ${currentSection}`;
+    }
+
     function checkAnswer(userAnswer) {
-        const question = generateQuestion();
-        const correctAnswer = (question.sum % 2 === 0) ? 0 : 1;
+        const correctAnswer = (currentSum % 2 === 0) ? 0 : 1;
         if (userAnswer === correctAnswer) {
             results[currentSection - 1].correct++;
         } else {
             results[currentSection - 1].incorrect++;
         }
         results[currentSection - 1].total++;
+        goToNextQuestion();  // Pindahkan ke soal berikutnya setelah menjawab
     }
 
-    // Menghasilkan soal baru
-    function generateQuestion() {
-        const num1 = Math.floor(Math.random() * 10);
-        const num2 = Math.floor(Math.random() * 10);
-        const sum = num1 + num2;
-        document.getElementById('question').textContent = `${num1} + ${num2} = ?`;
-        return { sum };
-    }
-
-    // Selesaikan tes
-    document.getElementById('finish-test').addEventListener('click', () => {
-        showSection('results-page');
-        displayResults();
-    });
-
-    // Tampilkan hasil
-    function displayResults() {
-        const resultsTableBody = document.querySelector('#results-table tbody');
-        resultsTableBody.innerHTML = '';
+    function showResults() {
+        showSection('resultSection');
+        resultsTable.innerHTML = '';  // Kosongkan tabel sebelum diisi
         results.forEach((result, index) => {
             if (result.total > 0) {
-                const accuracy = (result.correct / result.total * 100).toFixed(2);
                 const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>Bagian ${index + 1}</td>
-                    <td>${result.correct}</td>
-                    <td>${result.incorrect}</td>
-                    <td>${accuracy}%</td>
-                `;
-                resultsTableBody.appendChild(row);
+                const sectionCell = document.createElement('td');
+                sectionCell.textContent = index + 1;
+                const correctCell = document.createElement('td');
+                correctCell.textContent = result.correct;
+                const incorrectCell = document.createElement('td');
+                incorrectCell.textContent = result.incorrect;
+                const accuracyCell = document.createElement('td');
+                accuracyCell.textContent = ((result.correct / result.total) * 100).toFixed(2) + '%';
+                row.appendChild(sectionCell);
+                row.appendChild(correctCell);
+                row.appendChild(incorrectCell);
+                row.appendChild(accuracyCell);
+                resultsTable.appendChild(row);
             }
         });
     }
-
-    // Coba lagi
-    document.getElementById('try-again').addEventListener('click', () => {
-        currentSection = 1;
-        currentQuestion = 0;
-        results = Array.from({ length: totalSections }, () => ({ correct: 0, incorrect: 0, total: 0 }));
-        showSection('start-page');
-    });
 });
