@@ -21,21 +21,27 @@ document.addEventListener('DOMContentLoaded', function () {
         total: 0,
     }));
 
-    startButton.addEventListener('click', function () {
-        const fullName = fullNameInput.value.trim();
-        if (fullName) {
-            showSection('testSection');
-            startTest();
-        }
-    });
+    if (startButton) {
+        startButton.addEventListener('click', function () {
+            const fullName = fullNameInput.value.trim();
+            if (fullName) {
+                showSection('testSection');
+                startTest();
+            }
+        });
+    }
 
-    finishEarlyButton.addEventListener('click', function () {
-        showResults();
-    });
+    if (finishEarlyButton) {
+        finishEarlyButton.addEventListener('click', function () {
+            showResults();
+        });
+    }
 
-    tryAgainButton.addEventListener('click', function () {
-        location.reload();
-    });
+    if (tryAgainButton) {
+        tryAgainButton.addEventListener('click', function () {
+            location.reload();
+        });
+    }
 
     document.addEventListener('keydown', function (event) {
         if (event.key === '0' || event.key === '1') {
@@ -45,9 +51,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function showSection(sectionId) {
         document.querySelectorAll('.section').forEach(section => {
-            section.classList.remove('active');
+            section.style.display = 'none';
         });
-        document.getElementById(sectionId).classList.add('active');
+        document.getElementById(sectionId).style.display = 'block';
     }
 
     function startTest() {
@@ -79,11 +85,13 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function goToNextSection() {
+        clearInterval(timer); // Hentikan timer saat berpindah bagian
         currentSection++;
         if (currentSection <= sectionsCount) {
             currentQuestion = 0;
             startTimer();
             generateQuestion();
+            sectionElement.textContent = `Bagian ${currentSection}`;
         } else {
             showResults();
         }
@@ -94,7 +102,6 @@ document.addEventListener('DOMContentLoaded', function () {
         const num2 = Math.floor(Math.random() * 10);
         currentSum = num1 + num2;  // Simpan sum ke currentSum
         questionElement.textContent = `${num1} + ${num2} = ?`;
-        sectionElement.textContent = `Bagian ${currentSection}`;
     }
 
     function checkAnswer(userAnswer) {
