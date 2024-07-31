@@ -5,9 +5,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const questionElement = document.getElementById('question');
     const sectionElement = document.getElementById('section');
     const resultSection = document.getElementById('resultSection');
-    const resultsTable = document.getElementById('resultsTable');
+    const resultsTable = document.getElementById('resultsTable').getElementsByTagName('tbody')[0];
     const finishEarlyButton = document.getElementById('finishEarly');
     const tryAgainButton = document.getElementById('tryAgain');
+    const nextSectionButton = document.getElementById('nextSection');
 
     let currentSection = 1;
     let currentQuestion = 0;
@@ -21,27 +22,25 @@ document.addEventListener('DOMContentLoaded', function () {
         total: 0,
     }));
 
-    if (startButton) {
-        startButton.addEventListener('click', function () {
-            const fullName = fullNameInput.value.trim();
-            if (fullName) {
-                showSection('testSection');
-                startTest();
-            }
-        });
-    }
+    startButton.addEventListener('click', function () {
+        const fullName = fullNameInput.value.trim();
+        if (fullName) {
+            showSection('testSection');
+            startTest();
+        }
+    });
 
-    if (finishEarlyButton) {
-        finishEarlyButton.addEventListener('click', function () {
-            showResults();
-        });
-    }
+    finishEarlyButton.addEventListener('click', function () {
+        showResults();
+    });
 
-    if (tryAgainButton) {
-        tryAgainButton.addEventListener('click', function () {
-            location.reload();
-        });
-    }
+    tryAgainButton.addEventListener('click', function () {
+        location.reload();
+    });
+
+    nextSectionButton.addEventListener('click', function () {
+        goToNextSection();
+    });
 
     document.addEventListener('keydown', function (event) {
         if (event.key === '0' || event.key === '1') {
@@ -51,9 +50,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function showSection(sectionId) {
         document.querySelectorAll('.section').forEach(section => {
-            section.style.display = 'none';
+            section.classList.remove('active');
         });
-        document.getElementById(sectionId).style.display = 'block';
+        document.getElementById(sectionId).classList.add('active');
     }
 
     function startTest() {
@@ -85,13 +84,12 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function goToNextSection() {
-        clearInterval(timer); // Hentikan timer saat berpindah bagian
+        clearInterval(timer); // Matikan timer ketika pindah bagian
         currentSection++;
         if (currentSection <= sectionsCount) {
             currentQuestion = 0;
             startTimer();
             generateQuestion();
-            sectionElement.textContent = `Bagian ${currentSection}`;
         } else {
             showResults();
         }
@@ -102,6 +100,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const num2 = Math.floor(Math.random() * 10);
         currentSum = num1 + num2;  // Simpan sum ke currentSum
         questionElement.textContent = `${num1} + ${num2} = ?`;
+        sectionElement.textContent = `Bagian ${currentSection}`;
     }
 
     function checkAnswer(userAnswer) {
@@ -130,11 +129,4 @@ document.addEventListener('DOMContentLoaded', function () {
                 const accuracyCell = document.createElement('td');
                 accuracyCell.textContent = ((result.correct / result.total) * 100).toFixed(2) + '%';
                 row.appendChild(sectionCell);
-                row.appendChild(correctCell);
-                row.appendChild(incorrectCell);
-                row.appendChild(accuracyCell);
-                resultsTable.appendChild(row);
-            }
-        });
-    }
-});
+                row
