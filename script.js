@@ -17,17 +17,24 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 1000);
     }
 
-    function showTestSection() {
+    function showSection(sectionId) {
+        // Hide all sections
         document.getElementById('nameSection').style.display = 'none';
+        document.getElementById('testSection').style.display = 'none';
         document.getElementById('resultsSection').style.display = 'none';
-        document.getElementById('testSection').style.display = 'block';
+
+        // Show the selected section
+        document.getElementById(sectionId).style.display = 'block';
+    }
+
+    function showTestSection() {
+        showSection('testSection');
         startTimer();
         loadQuestion();
     }
 
     function showResultsSection() {
-        document.getElementById('testSection').style.display = 'none';
-        document.getElementById('resultsSection').style.display = 'block';
+        showSection('resultsSection');
         displayResults();
     }
 
@@ -87,7 +94,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    document.getElementById('startTest').onclick = showTestSection;
+    document.getElementById('startTest').onclick = () => {
+        showSection('testSection');
+        startTimer();
+        loadQuestion();
+    };
+
     document.getElementById('finishNow').onclick = showResultsSection;
     document.getElementById('nextSection').onclick = nextSection;
     document.getElementById('retryTest').onclick = () => location.reload();
