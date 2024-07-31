@@ -1,125 +1,148 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const sections = 15;
-    let currentSection = 1;
-    let timer;
-    let score = Array(sections).fill({correct: 0, incorrect: 0});
-    const questionsPerSection = 100;
-    let questionIndex = 0;
-    
-    const startButton = document.getElementById('start-test');
+    const startButton = document.getElementById('startButton');
     const testScreen = document.getElementById('test-screen');
-    const startScreen = document.getElementById('start-screen');
     const resultScreen = document.getElementById('result-screen');
-    const nextButton = document.getElementById('next-section');
-    const skipButton = document.getElementById('skip-section');
-    const resultTableBody = document.getElementById('result-body');
-    const retryButton = document.getElementById('retry-test');
-    const timerDisplay = document.getElementById('time-left');
-    const sectionNumberDisplay = document.getElementById('section-number');
-    const resultName = document.getElementById('result-name');
-    const questionContainer = document.getElementById('question-container');
-    const questionText = document.getElementById('question');
-    
-    startButton.addEventListener('click', () => {
+    const startScreen = document.getElementById('start-screen');
+    const fullNameInput = document.getElementById('fullName');
+    const nextSectionButton = document.getElementById('next-section');
+    const finishEarlyButton = document.getElementById('finish-early');
+    const resultsTableBody = document.querySelector('#results tbody');
+    const retryButton = document.getElementById('retryButton');
+    const segmentElement = document.getElementById('segment');
+    const timerElement = document.getElementById('timer');
+    const questionElement = document.getElementById('question');
+    const answerButtons = document.querySelectorAll('.answer-button');
+
+    let currentSection = 0;
+    let timer;
+    let startTime;
+    const sections = [];
+    let userName = '';
+
+    // Initialize sections
+    for (let i = 0; i < 15; i++) {
+        sections.push({
+            number: i + 1,
+            correct: 0,
+            incorrect: 0,
+            total: 0
+        });
+    }
+
+    // Function to start the test
+    const startTest = () => {
+        userName = fullNameInput.value.trim();
+        if (userName === '') return;
+
         startScreen.style.display = 'none';
-        testScreen.style.display = 'block';
+        testScreen.style.display = 'flex';
+        resultScreen.style.display = 'none';
+
         startSection(currentSection);
-    });
-    
-    nextButton.addEventListener('click', () => {
-        nextSection();
-    });
-    
-    skipButton.addEventListener('click', () => {
-        finishTest();
-    });
-    
-    retryButton.addEventListener('click', () => {
-        location.reload();
-    });
-    
-    function startSection(section) {
-        questionIndex = 0;
-        sectionNumberDisplay.textContent = section;
-        startTimer();
-        loadQuestion();
-    }
-    
-    function startTimer() {
-        let timeLeft = 60;
-        timerDisplay.textContent = timeLeft;
-        timer = setInterval(() => {
-            timeLeft -= 1;
-            timerDisplay.textContent = timeLeft;
-            if (timeLeft <= 0) {
-                clearInterval(timer);
-                nextSection();
-            }
-        }, 1000);
-    }
-    
-    function loadQuestion() {
-        if (questionIndex >= questionsPerSection) {
-            nextSection();
+    };
+
+    // Function to start a specific section
+    const startSection = (sectionIndex) => {
+        if (timer) clearInterval(timer);
+
+        currentSection = sectionIndex;
+        if (currentSection >= sections.length) {
+            showResults();
             return;
         }
-        const num1 = Math.floor(Math.random() * 9) + 1;
-        const num2 = Math.floor(Math.random() * 9) + 1;
-        questionText.textContent = `${num1} + ${num2} = ?`;
-        
-        questionContainer.querySelectorAll('.answer-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                handleAnswer(btn.dataset.answer);
-            });
+
+        segmentElement.textContent = `Bagian ${currentSection + 1}`;
+        startTime = Date.now();
+        updateTimer();
+
+        // Generate a question
+        const num1 = Math.floor(Math.random() * 10);
+        const num2 = Math.floor(Math.random() * 10);
+        questionElement.textContent = `${num1} + ${num2} = ?`;
+
+        // Reset and enable answer buttons
+        answerButtons.forEach(button => {
+            button.classList.remove('disabled');
+            button.addEventListener('click', () => handleAnswer(button.dataset.answer));
         });
-        
-        document.addEventListener('keydown', (e) => {
-            if (e.key === '0' || e.key === '1') {
-                handleAnswer(e.key);
-            }
-        });
-    }
-    
-    function handleAnswer(answer) {
-        const num1 = parseInt(questionText.textContent.split(' ')[0]);
-        const num2 = parseInt(questionText.textContent.split(' ')[2]);
-        const correctAnswer = (num1 + num2) % 2 === 0 ? '0' : '1';
-        if (answer === correctAnswer) {
-            score[currentSection - 1].correct += 1;
+
+        // Add event listener for keyboard inputs
+        document.addEventListener('keydown', handleKeyboardInput);
+
+        // Set up the "Lanjut ke bagian selanjutnya" button
+        nextSectionButton.style.display = 'block';
+        nextSectionButton.onclick = () => {
+            clearInterval(timer);
+            startSection(currentSection + 1);
+        };
+
+        // Set up the "Selesaikan lebih dulu" button
+        finishEarlyButton.style.display = 'block';
+        finishEarlyButton.onclick = showResults;
+    };
+
+    // Function to handle answer selection
+    const handleAnswer = (answer) => {
+        const [num1, num2] = questionElement.textContent.split(' + ').map(Number);
+        const correctAnswer = (num1 + num2) % 2;
+        const isCorrect = (answer == correctAnswer);
+
+        if (isCorrect) {
+            sections[currentSection].correct++;
         } else {
-            score[currentSection - 1].incorrect += 1;
+            sections[currentSection].incorrect++;
         }
-        questionIndex += 1;
-        loadQuestion();
-    }
-    
-    function nextSection() {
-        clearInterval(timer);
-        if (currentSection < sections) {
-            currentSection += 1;
-            startSection(currentSection);
-        } else {
-            finishTest();
+        sections[currentSection].total++;
+
+        if (timer) clearInterval(timer);
+        document.querySelectorAll('.answer-button').forEach(button => button.classList.add('disabled'));
+        setTimeout(() => startSection(currentSection + 1), 500);
+    };
+
+    // Function to handle keyboard input
+    const handleKeyboardInput = (event) => {
+        if (event.key === '0' || event.key === '1') {
+            handleAnswer(event.key);
         }
-    }
-    
-    function finishTest() {
+    };
+
+    // Function to update the timer
+    const updateTimer = () => {
+        const timeLeft = Math.max(0, 60 - Math.floor((Date.now() - startTime) / 1000));
+        timerElement.textContent = `Sisa waktu: ${timeLeft} detik`;
+
+        if (timeLeft <= 0) {
+            clearInterval(timer);
+            handleAnswer('0'); // or '1' depending on your logic
+        }
+    };
+
+    // Function to show results
+    const showResults = () => {
         testScreen.style.display = 'none';
-        resultScreen.style.display = 'block';
-        resultName.textContent = document.getElementById('full-name').value;
-        displayResults();
-    }
-    
-    function displayResults() {
-        resultTableBody.innerHTML = '';
-        score.forEach((section, index) => {
+        resultScreen.style.display = 'flex';
+
+        const nameDisplay = document.getElementById('name-display');
+        nameDisplay.textContent = `Nama: ${userName}`;
+
+        resultsTableBody.innerHTML = '';
+        sections.forEach(section => {
             const row = document.createElement('tr');
             row.innerHTML = `
-                <td>${index + 1}</td>
+                <td>Bagian ${section.number}</td>
                 <td>${section.correct}</td>
                 <td>${section.incorrect}</td>
+                <td>${((section.correct / section.total) * 100).toFixed(2)}%</td>
             `;
-            resultTableBody.appendChild(row);
+            resultsTableBody.appendChild(row);
         });
-    }
+    };
+
+    // Event listeners
+    startButton.addEventListener('click', startTest);
+    retryButton.addEventListener('click', () => {
+        resultScreen.style.display = 'none';
+        startScreen.style.display = 'flex';
+        fullNameInput.value = '';
+    });
 });
