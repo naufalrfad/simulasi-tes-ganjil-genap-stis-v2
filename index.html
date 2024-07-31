@@ -1,47 +1,59 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SIMULASI TES GANJIL GENAP STIS</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <div id="main-container">
-        <div id="start-screen">
-            <h1>SIMULASI TES GANJIL GENAP STIS</h1>
-            <input type="text" id="full-name" placeholder="Nama Lengkap">
-            <button id="start-test">Mulai Tes</button>
-        </div>
-        <div id="test-screen" style="display: none;">
-            <div id="timer">Sisa waktu: <span id="time-left">60</span> detik</div>
-            <h2>Bagian <span id="section-number">1</span></h2>
-            <div id="question-container">
-                <p id="question">1 + 2 = ?</p>
-                <button class="answer-btn" data-answer="0">0</button>
-                <button class="answer-btn" data-answer="1">1</button>
-            </div>
-            <button id="skip-section" style="display: none;">Selesaikan lebih dulu</button>
-            <button id="next-section">Lanjut ke bagian selanjutnya</button>
-        </div>
-        <div id="result-screen" style="display: none;">
-            <h1>Hasil Tes</h1>
-            <p>Nama: <span id="result-name"></span></p>
-            <table id="result-table">
-                <thead>
-                    <tr>
-                        <th>Bagian</th>
-                        <th>Benar</th>
-                        <th>Salah</th>
-                    </tr>
-                </thead>
-                <tbody id="result-body">
-                    <!-- Results will be inserted here -->
-                </tbody>
-            </table>
-            <button id="retry-test">Coba lagi</button>
-        </div>
-    </div>
-    <script src="script.js"></script>
-</body>
-</html>
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+.screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+header {
+    margin-bottom: 20px;
+}
+
+input, button {
+    margin: 10px;
+    padding: 10px;
+}
+
+button {
+    cursor: pointer;
+}
+
+#answers {
+    margin: 20px;
+}
+
+.answer-button {
+    width: 80px;
+    height: 40px;
+    font-size: 20px;
+    margin: 5px;
+}
+
+#results {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+}
+
+#results th, #results td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+#results th {
+    background-color: #f4f4f4;
+}
+
+#results tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
