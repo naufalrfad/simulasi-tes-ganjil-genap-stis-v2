@@ -3,50 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulasi Tes Ganjil-Genap STIS</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Simulasi Tes Ganjil-Genap</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="app">
-        <!-- Halaman Awal -->
-        <div id="start-page" class="page">
-            <h1>Tes Ganjil-Genap</h1>
-            <input type="text" id="full-name" placeholder="Nama Lengkap">
-            <button id="start-test">Mulai Tes</button>
-        </div>
+    <!-- Halaman Awal -->
+    <div id="start-page">
+        <h1>Tes Ganjil-Genap</h1>
+        <input type="text" id="full-name" placeholder="Nama Lengkap">
+        <button id="start-test" class="btn-blue">Mulai Tes</button>
+    </div>
 
-        <!-- Halaman Tes -->
-        <div id="test-page" class="page hidden">
-            <h1>Tes Ganjil-Genap</h1>
-            <div id="timer">Sisa waktu: <span id="timer-count">60</span> detik</div>
-            <div id="question"></div>
+    <!-- Halaman Tes -->
+    <div id="test-page" class="hidden">
+        <h1>Tes Ganjil-Genap</h1>
+        <p id="timer-count">60</p>
+        <p id="question">Soal akan muncul di sini</p>
+        <div>
             <button class="answer-btn" data-value="0">0</button>
             <button class="answer-btn" data-value="1">1</button>
-            <button id="finish-test">Selesaikan Sekarang</button>
-            <p id="warning" class="warning">Peringatan, jangan klik sebelum ada instruksi</p>
         </div>
-
-        <!-- Halaman Hasil -->
-        <div id="results-page" class="page hidden">
-            <h1>Tes Ganjil-Genap</h1>
-            <h2>Hasil Tes</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Bagian</th>
-                        <th>Benar</th>
-                        <th>Salah</th>
-                        <th>Akurasi</th>
-                    </tr>
-                </thead>
-                <tbody id="results-table">
-                    <!-- Results will be dynamically added here -->
-                </tbody>
-            </table>
-            <button id="try-again">Coba Lagi</button>
-            <p>Hasil anda tidak akan tersimpan, harap melakukan screenshot sebelum klik coba lagi</p>
-        </div>
+        <button id="finish-test" class="btn-red">Selesaikan Sekarang</button>
+        <p id="warning">Peringatan, jangan klik sebelum ada instruksi</p>
     </div>
+
+    <!-- Halaman Hasil -->
+    <div id="results-page" class="hidden">
+        <h1>Tes Ganjil-Genap</h1>
+        <p>Hasil Tes</p>
+        <table id="results-table">
+            <thead>
+                <tr>
+                    <th>Bagian</th>
+                    <th>Benar</th>
+                    <th>Salah</th>
+                    <th>Akurasi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Baris hasil akan muncul di sini -->
+            </tbody>
+        </table>
+        <button id="try-again" class="btn-green">Coba Lagi</button>
+        <p>Hasil anda tidak akan tersimpan, harap melakukan screenshot sebelum klik coba lagi</p>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
