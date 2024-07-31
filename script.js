@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Mengubah tampilan halaman
     function showSection(sectionId) {
-        document.querySelectorAll('div[id$="-page"]').forEach(page => {
+        document.querySelectorAll('div.page').forEach(page => {
             if (page.id === sectionId) {
                 page.classList.remove('hidden');
             } else {
