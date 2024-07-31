@@ -43,7 +43,6 @@ document.addEventListener('DOMContentLoaded', () => {
             timerElement.textContent = timeLeft;
             if (timeLeft <= 0) {
                 clearInterval(timer);
-                // Move to next section or finish test
                 nextSection();
             }
         }, 1000);
@@ -124,14 +123,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     answerButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            handleAnswer(button.getAttribute('data-value'));
-        });
-    });
-
-    document.addEventListener('keydown', (event) => {
-        if (event.key === '0' || event.key === '1') {
-            handleAnswer(event.key);
-        }
+        button.addEventListener('click', () => handleAnswer(button.dataset.value));
     });
 });
