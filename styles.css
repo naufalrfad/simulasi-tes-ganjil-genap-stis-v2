@@ -13,12 +13,12 @@ body {
     padding: 20px;
 }
 
-#nameSection, #testSection, #resultsSection {
-    display: none;
+#nameSection {
+    display: block; /* Ensure the name section is visible by default */
 }
 
-#nameSection {
-    display: block; /* Make sure the name section is visible by default */
+#testSection, #resultsSection {
+    display: none;
 }
 
 button {
