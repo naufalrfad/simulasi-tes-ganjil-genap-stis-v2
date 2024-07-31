@@ -1,0 +1,79 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+#container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+#nameSection, #testSection, #resultsSection {
+    display: none;
+}
+
+#nameSection {
+    display: block; /* Ensure the name section is visible by default */
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button#finishNow {
+    background-color: red;
+}
+
+button#nextSection {
+    background-color: #007bff;
+}
+
+button#retryTest {
+    background-color: #007bff;
+}
+
+#question {
+    font-size: 24px;
+    margin: 20px 0;
+}
+
+#answers {
+    margin: 20px 0;
+}
+
+#answers .answer {
+    font-size: 20px;
+    padding: 10px;
+    margin: 5px;
+}
+
+.hidden {
+    display: none;
+}
+
+#resultsTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+#resultsTable th, #resultsTable td {
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+#resultsTable th {
+    background-color: #007bff;
+    color: white;
+}
