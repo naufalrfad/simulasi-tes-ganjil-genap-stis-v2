@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,46 +7,41 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="start-screen">
-        <h1>SIMULASI TES GANJIL GENAP STIS</h1>
-        <form id="start-form">
-            <input type="text" id="fullName" placeholder="Nama Lengkap" required>
-            <button type="button" id="startButton">Mulai Tes</button>
-        </form>
-    </div>
-
-    <div id="test-screen" style="display: none;">
-        <div id="segment">Bagian 1</div>
-        <div id="timer">Sisa waktu: 60 detik</div>
-        <div id="question">1 + 6 = ?</div>
-        <div id="answers">
-            <button class="answer-button" data-answer="0">0</button>
-            <button class="answer-button" data-answer="1">1</button>
+    <div id="container">
+        <div id="nameSection">
+            <h1>SIMULASI TES GANJIL GENAP STIS</h1>
+            <input type="text" id="fullName" placeholder="Nama Lengkap">
+            <button id="startTest">Mulai Tes</button>
         </div>
-        <div id="navigation-buttons">
-            <button id="next-section" style="display: none;">Lanjut ke bagian selanjutnya</button>
-            <button id="finish-early" style="display: none;">Selesaikan lebih dulu</button>
+        <div id="testSection" class="hidden">
+            <div id="header">
+                <span id="timer">Sisa waktu: 60 detik</span>
+                <span id="sectionNumber">Bagian 1</span>
+            </div>
+            <div id="question"></div>
+            <div id="answers">
+                <button class="answer" data-value="0">0</button>
+                <button class="answer" data-value="1">1</button>
+            </div>
+            <button id="nextSection" class="hidden">Lanjut ke bagian berikutnya</button>
+            <button id="finishNow" class="hidden">Selesaikan sekarang</button>
+        </div>
+        <div id="resultsSection" class="hidden">
+            <h2>Hasil Tes</h2>
+            <table id="resultsTable">
+                <thead>
+                    <tr>
+                        <th>Bagian</th>
+                        <th>Benar</th>
+                        <th>Salah</th>
+                        <th>Akurasi</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+            <button id="retryTest">Coba Lagi</button>
         </div>
     </div>
-
-    <div id="result-screen" style="display: none;">
-        <div id="name-display"></div>
-        <table id="results">
-            <thead>
-                <tr>
-                    <th>Bagian</th>
-                    <th>Benar</th>
-                    <th>Salah</th>
-                    <th>Akurasi</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Hasil tes akan ditampilkan di sini -->
-            </tbody>
-        </table>
-        <button id="retryButton">Coba lagi</button>
-    </div>
-
-    <script src="scripts.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
