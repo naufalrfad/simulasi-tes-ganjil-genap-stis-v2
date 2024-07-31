@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const correctAnswer = (a + b) % 2 === 0 ? 0 : 1;
         questionData = {a, b, correctAnswer};
         document.getElementById('question').innerText = `${a} + ${b} = ?`;
-        
+
         document.querySelectorAll('#answers .answer').forEach(button => {
             button.onclick = () => {
                 checkAnswer(button.dataset.value);
