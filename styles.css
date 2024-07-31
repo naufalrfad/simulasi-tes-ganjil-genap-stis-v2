@@ -1,31 +1,48 @@
+/* Reset styling dasar */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Atur gaya untuk body dan elemen */
 body {
     font-family: Arial, sans-serif;
     text-align: center;
     padding: 20px;
+    background-color: #f8f9fa;
 }
 
+/* Sembunyikan elemen halaman yang tidak aktif */
 .hidden {
     display: none;
 }
 
+/* Gaya untuk heading */
 h1 {
     margin-bottom: 20px;
 }
 
+/* Gaya untuk input teks */
 input[type="text"] {
     padding: 10px;
     font-size: 16px;
     margin-bottom: 10px;
+    width: 100%;
+    max-width: 300px;
 }
 
+/* Gaya untuk tombol */
 button {
     padding: 10px 20px;
     font-size: 16px;
     border: none;
     color: #fff;
     cursor: pointer;
+    margin: 10px;
 }
 
+/* Warna untuk tombol berdasarkan fungsi */
 .btn-blue {
     background-color: #007bff;
 }
@@ -38,6 +55,7 @@ button {
     background-color: #28a745;
 }
 
+/* Gaya untuk timer dan soal */
 #timer-count {
     font-size: 24px;
     margin-bottom: 20px;
@@ -48,9 +66,11 @@ button {
     margin-bottom: 20px;
 }
 
+/* Gaya untuk tombol jawaban */
 .answer-btn {
     font-size: 24px;
     width: 100px;
     height: 50px;
     margin: 10px;
+    border-radius: 5px;
 }
