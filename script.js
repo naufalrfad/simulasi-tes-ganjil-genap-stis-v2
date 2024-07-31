@@ -94,10 +94,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Initialize the page to show the name section first
+    showSection('nameSection');
+
     document.getElementById('startTest').onclick = () => {
-        showSection('testSection');
-        startTimer();
-        loadQuestion();
+        showTestSection();
     };
 
     document.getElementById('finishNow').onclick = showResultsSection;
