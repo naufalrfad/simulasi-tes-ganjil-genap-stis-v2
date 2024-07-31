@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="container">
+    <div id="app">
         <!-- Halaman Awal -->
         <div id="start-page" class="page">
             <h1>Tes Ganjil-Genap</h1>
@@ -18,21 +18,19 @@
         <!-- Halaman Tes -->
         <div id="test-page" class="page hidden">
             <h1>Tes Ganjil-Genap</h1>
-            <div id="timer">Sisa waktu: <span id="time">60</span> detik</div>
+            <div id="timer">Sisa waktu: <span id="timer-count">60</span> detik</div>
             <div id="question"></div>
-            <div id="answers">
-                <button class="answer" id="answer-0">0</button>
-                <button class="answer" id="answer-1">1</button>
-            </div>
+            <button class="answer-btn" data-value="0">0</button>
+            <button class="answer-btn" data-value="1">1</button>
             <button id="finish-test">Selesaikan Sekarang</button>
-            <p id="warning" class="hidden">Peringatan, jangan klik sebelum ada instruksi</p>
+            <p id="warning" class="warning">Peringatan, jangan klik sebelum ada instruksi</p>
         </div>
 
         <!-- Halaman Hasil -->
         <div id="results-page" class="page hidden">
             <h1>Tes Ganjil-Genap</h1>
             <h2>Hasil Tes</h2>
-            <table id="results-table">
+            <table>
                 <thead>
                     <tr>
                         <th>Bagian</th>
@@ -41,15 +39,14 @@
                         <th>Akurasi</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <!-- Results will be dynamically inserted here -->
+                <tbody id="results-table">
+                    <!-- Results will be dynamically added here -->
                 </tbody>
             </table>
-            <button id="retry-test">Coba Lagi</button>
+            <button id="try-again">Coba Lagi</button>
             <p>Hasil anda tidak akan tersimpan, harap melakukan screenshot sebelum klik coba lagi</p>
         </div>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>
