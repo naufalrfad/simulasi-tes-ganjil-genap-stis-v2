@@ -19,12 +19,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function showSection(sectionId) {
         // Hide all sections
-        document.getElementById('nameSection').style.display = 'none';
-        document.getElementById('testSection').style.display = 'none';
-        document.getElementById('resultsSection').style.display = 'none';
+        document.querySelectorAll('.section').forEach(section => {
+            section.classList.remove('active');
+        });
 
         // Show the selected section
-        document.getElementById(sectionId).style.display = 'block';
+        document.getElementById(sectionId).classList.add('active');
     }
 
     function showTestSection() {
