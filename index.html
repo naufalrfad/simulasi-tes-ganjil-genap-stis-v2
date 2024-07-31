@@ -7,28 +7,25 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Halaman Awal -->
     <div id="startSection" class="section">
         <h1>Tes Ganjil-Genap</h1>
-        <input type="text" id="fullName" placeholder="Nama Lengkap" autofocus>
+        <input type="text" id="fullName" placeholder="Nama Lengkap">
         <button id="startButton" class="start-button">Mulai Tes</button>
     </div>
 
-    <!-- Halaman Tes -->
-    <div id="testSection" class="section" style="display: none;">
+    <div id="testSection" class="section">
         <h1>Tes Ganjil-Genap</h1>
-        <div id="section"></div>
-        <div id="question"></div>
-        <button id="answer0" class="answer-button">0</button>
-        <button id="answer1" class="answer-button">1</button>
-        <button id="nextSectionButton" class="next-button">Ke bagian berikutnya</button>
-        <button id="finishEarly" class="finish-button">Selesaikan sekarang</button>
-        <p id="warning" class="warning">Peringatan, jangan klik sebelum ada instruksi</p>
         <div id="timer">Sisa waktu: 60 detik</div>
+        <div id="question"></div>
+        <div id="section"></div>
+        <button class="answer-button" id="answer0">0</button>
+        <button class="answer-button" id="answer1">1</button>
+        <button id="nextSection" class="next-button">Ke bagian berikutnya</button>
+        <button id="finishEarly" class="finish-button">Selesaikan Sekarang</button>
+        <p class="warning">Peringatan: jangan klik sebelum ada instruksi</p>
     </div>
 
-    <!-- Halaman Hasil -->
-    <div id="resultSection" class="section" style="display: none;">
+    <div id="resultSection" class="section">
         <h1>Tes Ganjil-Genap</h1>
         <h2>Hasil Tes</h2>
         <table id="resultsTable">
@@ -43,7 +40,7 @@
             <tbody></tbody>
         </table>
         <button id="tryAgain" class="retry-button">Coba Lagi</button>
-        <p>Hasil anda tidak akan tersimpan, harap melakukan screenshot sebelum klik coba lagi.</p>
+        <p>Hasil anda tidak akan tersimpan, harap melakukan screenshot sebelum klik coba lagi</p>
     </div>
 
     <script src="script.js"></script>
