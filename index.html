@@ -4,20 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simulasi Tes Ganjil-Genap</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <!-- Halaman Awal -->
-    <div id="start-page">
+    <div id="start-page" class="centered">
         <h1>Tes Ganjil-Genap</h1>
         <input type="text" id="full-name" placeholder="Nama Lengkap">
         <button id="start-test" class="btn-blue">Mulai Tes</button>
     </div>
 
     <!-- Halaman Tes -->
-    <div id="test-page" class="hidden">
+    <div id="test-page" class="hidden centered">
         <h1>Tes Ganjil-Genap</h1>
-        <p id="timer-count">60</p>
+        <p id="timer-count">Sisa waktu: 60 detik</p>
         <p id="question">Soal akan muncul di sini</p>
         <div>
             <button class="answer-btn" data-value="0">0</button>
@@ -28,7 +28,7 @@
     </div>
 
     <!-- Halaman Hasil -->
-    <div id="results-page" class="hidden">
+    <div id="results-page" class="hidden centered">
         <h1>Tes Ganjil-Genap</h1>
         <p>Hasil Tes</p>
         <table id="results-table">
