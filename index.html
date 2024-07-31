@@ -1,59 +1,52 @@
-body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background-color: #f0f0f0;
-    margin: 0;
-    padding: 0;
-}
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIMULASI TES GANJIL GENAP STIS</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="start-screen">
+        <h1>SIMULASI TES GANJIL GENAP STIS</h1>
+        <form id="start-form">
+            <input type="text" id="fullName" placeholder="Nama Lengkap" required>
+            <button type="button" id="startButton">Mulai Tes</button>
+        </form>
+    </div>
 
-.screen {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-}
+    <div id="test-screen" style="display: none;">
+        <div id="segment">Bagian 1</div>
+        <div id="timer">Sisa waktu: 60 detik</div>
+        <div id="question">1 + 6 = ?</div>
+        <div id="answers">
+            <button class="answer-button" data-answer="0">0</button>
+            <button class="answer-button" data-answer="1">1</button>
+        </div>
+        <div id="navigation-buttons">
+            <button id="next-section" style="display: none;">Lanjut ke bagian selanjutnya</button>
+            <button id="finish-early" style="display: none;">Selesaikan lebih dulu</button>
+        </div>
+    </div>
 
-header {
-    margin-bottom: 20px;
-}
+    <div id="result-screen" style="display: none;">
+        <div id="name-display"></div>
+        <table id="results">
+            <thead>
+                <tr>
+                    <th>Bagian</th>
+                    <th>Benar</th>
+                    <th>Salah</th>
+                    <th>Akurasi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Hasil tes akan ditampilkan di sini -->
+            </tbody>
+        </table>
+        <button id="retryButton">Coba lagi</button>
+    </div>
 
-input, button {
-    margin: 10px;
-    padding: 10px;
-}
-
-button {
-    cursor: pointer;
-}
-
-#answers {
-    margin: 20px;
-}
-
-.answer-button {
-    width: 80px;
-    height: 40px;
-    font-size: 20px;
-    margin: 5px;
-}
-
-#results {
-    width: 80%;
-    margin: 20px auto;
-    border-collapse: collapse;
-}
-
-#results th, #results td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: center;
-}
-
-#results th {
-    background-color: #f4f4f4;
-}
-
-#results tbody tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
+    <script src="scripts.js"></script>
+</body>
+</html>
