@@ -17,6 +17,10 @@ body {
     display: none;
 }
 
+#nameSection {
+    display: block; /* Make sure the name section is visible by default */
+}
+
 button {
     background-color: #007bff;
     color: white;
