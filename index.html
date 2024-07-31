@@ -1,41 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SIMULASI TES GANJIL GENAP STIS</title>
+    <title>Simulasi Tes Ganjil-Genap STIS</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div id="container">
-        <!-- Halaman Nama -->
-        <div id="nameSection" class="section active">
-            <h1>SIMULASI TES GANJIL GENAP STIS</h1>
-            <input type="text" id="fullName" placeholder="Nama Lengkap">
-            <button id="startTest">Mulai Tes</button>
+        <!-- Halaman Awal -->
+        <div id="start-page" class="page">
+            <h1>Tes Ganjil-Genap</h1>
+            <input type="text" id="full-name" placeholder="Nama Lengkap">
+            <button id="start-test">Mulai Tes</button>
         </div>
 
         <!-- Halaman Tes -->
-        <div id="testSection" class="section hidden">
-            <div id="header">
-                <span id="timer">Sisa waktu: 60 detik</span>
-                <span id="sectionNumber">Bagian 1</span>
-            </div>
+        <div id="test-page" class="page hidden">
+            <h1>Tes Ganjil-Genap</h1>
+            <div id="timer">Sisa waktu: <span id="time">60</span> detik</div>
             <div id="question"></div>
             <div id="answers">
-                <button class="answer" data-value="0">0</button>
-                <button class="answer" data-value="1">1</button>
+                <button class="answer" id="answer-0">0</button>
+                <button class="answer" id="answer-1">1</button>
             </div>
-            <div id="controls">
-                <button id="nextSection" class="hidden">Lanjut ke bagian berikutnya</button>
-                <button id="finishNow" class="hidden">Selesaikan sekarang</button>
-            </div>
+            <button id="finish-test">Selesaikan Sekarang</button>
+            <p id="warning" class="hidden">Peringatan, jangan klik sebelum ada instruksi</p>
         </div>
 
         <!-- Halaman Hasil -->
-        <div id="resultsSection" class="section hidden">
+        <div id="results-page" class="page hidden">
+            <h1>Tes Ganjil-Genap</h1>
             <h2>Hasil Tes</h2>
-            <table id="resultsTable">
+            <table id="results-table">
                 <thead>
                     <tr>
                         <th>Bagian</th>
@@ -44,11 +41,15 @@
                         <th>Akurasi</th>
                     </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody>
+                    <!-- Results will be dynamically inserted here -->
+                </tbody>
             </table>
-            <button id="retryTest">Coba Lagi</button>
+            <button id="retry-test">Coba Lagi</button>
+            <p>Hasil anda tidak akan tersimpan, harap melakukan screenshot sebelum klik coba lagi</p>
         </div>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>
