@@ -58,6 +58,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function startTimer() {
+        clearInterval(timer);
         let timeLeft = 60;
         timerElement.textContent = `Sisa waktu: ${timeLeft} detik`;
         timer = setInterval(function () {
@@ -80,6 +81,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function goToNextSection() {
+        clearInterval(timer);
         currentSection++;
         if (currentSection <= sectionsCount) {
             currentQuestion = 0;
