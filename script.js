@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const timerElement = document.getElementById('timer');
     const questionElement = document.getElementById('question');
     const answerButtons = document.querySelectorAll('.answer-button');
-
+    
     let currentSection = 0;
     let timer;
     let startTime;
@@ -100,49 +100,4 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // Function to handle keyboard input
-    const handleKeyboardInput = (event) => {
-        if (event.key === '0' || event.key === '1') {
-            handleAnswer(event.key);
-        }
-    };
-
-    // Function to update the timer
-    const updateTimer = () => {
-        const timeLeft = Math.max(0, 60 - Math.floor((Date.now() - startTime) / 1000));
-        timerElement.textContent = `Sisa waktu: ${timeLeft} detik`;
-
-        if (timeLeft <= 0) {
-            clearInterval(timer);
-            handleAnswer('0'); // or '1' depending on your logic
-        }
-    };
-
-    // Function to show results
-    const showResults = () => {
-        testScreen.style.display = 'none';
-        resultScreen.style.display = 'flex';
-
-        const nameDisplay = document.getElementById('name-display');
-        nameDisplay.textContent = `Nama: ${userName}`;
-
-        resultsTableBody.innerHTML = '';
-        sections.forEach(section => {
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>Bagian ${section.number}</td>
-                <td>${section.correct}</td>
-                <td>${section.incorrect}</td>
-                <td>${((section.correct / section.total) * 100).toFixed(2)}%</td>
-            `;
-            resultsTableBody.appendChild(row);
-        });
-    };
-
-    // Event listeners
-    startButton.addEventListener('click', startTest);
-    retryButton.addEventListener('click', () => {
-        resultScreen.style.display = 'none';
-        startScreen.style.display = 'flex';
-        fullNameInput.value = '';
-    });
-});
+    const handleKeyboardInput
