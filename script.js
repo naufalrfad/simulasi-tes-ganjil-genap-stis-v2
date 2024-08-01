@@ -98,13 +98,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 } else {
                     wrongAnswers++;
                 }
-                // Save answer immediately
-                results.push({
-                    section: currentSection,
-                    question: currentQuestion,
-                    correct: correctAnswer,
-                    userAnswer: parseInt(button.id.split('-')[1])
-                });
                 nextQuestion();
             }
         });
