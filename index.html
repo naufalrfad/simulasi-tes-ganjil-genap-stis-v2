@@ -12,24 +12,23 @@
         <input type="text" id="full-name" placeholder="Nama Lengkap">
         <button id="start-test">Mulai Tes</button>
     </div>
-    
+
     <div id="test-page" class="page" style="display: none;">
         <h1>Tes Ganjil-Genap</h1>
-        <p id="section-number">Bagian ke-1</p>
-        <p id="timer">Sisa waktu: 60 detik</p>
-        <p id="question" class="question"></p>
+        <div id="section-number">Bagian ke-1</div>
+        <div id="timer">Sisa waktu: 60 detik</div>
+        <div id="question">1 + 1</div>
         <div class="answer-buttons">
-            <button class="answer" id="answer-0">0</button>
-            <button class="answer" id="answer-1">1</button>
+            <button id="answer-0" class="answer">0</button>
+            <button id="answer-1" class="answer">1</button>
         </div>
         <button id="next-section" class="next">Lanjut ke bagian berikutnya</button>
         <button id="finish-now" class="finish">Selesaikan sekarang</button>
-        <p class="warning">Peringatan: jangan klik sebelum ada instruksi</p>
+        <div class="warning">Peringatan, jangan klik sebelum ada instruksi</div>
     </div>
-    
+
     <div id="result-page" class="page" style="display: none;">
-        <h1>Tes Ganjil-Genap</h1>
-        <h2>Hasil Tes</h2>
+        <h1>Hasil Tes</h1>
         <table>
             <thead>
                 <tr>
@@ -39,11 +38,10 @@
                     <th>Akurasi</th>
                 </tr>
             </thead>
-            <tbody id="results-table">
-            </tbody>
+            <tbody id="results-table"></tbody>
         </table>
         <button id="retry" class="retry">Coba Lagi</button>
-        <p class="warning">Hasil anda tidak akan tersimpan, harap melakukan screenshot sebelum klik coba lagi</p>
+        <div>Hasil anda tidak akan tersimpan, harap melakukan screenshot sebelum klik coba lagi</div>
     </div>
 
     <script src="script.js"></script>
