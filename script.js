@@ -113,13 +113,13 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-startTestButton.onclick = () => {
-    // Langsung pindah ke halaman tes, mulai timer dan pertanyaan
-    startPage.style.display = "none";
-    testPage.style.display = "block";
-    startTimer(60);
-    nextQuestion();
-};
+    startTestButton.onclick = () => {
+        // Langsung pindah ke halaman tes, mulai timer dan pertanyaan
+        startPage.style.display = "none";
+        testPage.style.display = "block";
+        startTimer(60);
+        nextQuestion();
+    };
 
     finishNowButton.onclick = () => {
         stopTimer();
@@ -138,12 +138,6 @@ startTestButton.onclick = () => {
     retryButton.onclick = () => {
         location.reload();
     };
-
-    fullNameInput.addEventListener("keypress", function (e) {
-        if (e.key === "Enter") {
-            startTestButton.click();
-        }
-    });
 
     document.addEventListener("keydown", function (e) {
         if (testPage.style.display === "block") {
