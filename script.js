@@ -59,19 +59,21 @@ document.addEventListener("DOMContentLoaded", function () {
     function nextSection() {
         stopTimer();
 
-        results[currentSection - 1] = {
+        // Push current section results
+        results.push({
             section: currentSection,
             correct: correctAnswers,
             wrong: wrongAnswers,
             accuracy: (correctAnswers + wrongAnswers > 0) ? 
                 ((correctAnswers / (correctAnswers + wrongAnswers)) * 100).toFixed(2) + "%" : "-"
-        };
+        });
 
         if (currentSection >= 50) {
             showResults();
             return;
         }
 
+        // Prepare for the next section
         currentSection++;
         currentQuestion = 0;
         correctAnswers = 0;
