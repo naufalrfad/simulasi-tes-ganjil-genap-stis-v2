@@ -22,7 +22,6 @@ document.addEventListener("DOMContentLoaded", function () {
     let timer;
     let results = [];
 
-    // Function to stop the current timer
     function stopTimer() {
         clearInterval(timer);
     }
@@ -49,10 +48,24 @@ document.addEventListener("DOMContentLoaded", function () {
         return (num1 + num2) % 2;
     }
 
-    function nextSection() {
-        stopTimer();  // Stop the current timer when moving to the next section
+    function updateResultsTable() {
+        const resultsTable = document.getElementById("results-table");
+        resultsTable.innerHTML = "";
+        results.forEach(result => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${result.section}</td>
+                <td>${result.correct}</td>
+                <td>${result.wrong}</td>
+                <td>${result.accuracy}</td>
+            `;
+            resultsTable.appendChild(row);
+        });
+    }
 
-        // Save results only if questions were answered
+    function nextSection() {
+        stopTimer(); 
+
         if (currentQuestion > 0) {
             results.push({
                 section: currentSection,
@@ -61,6 +74,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 accuracy: (correctAnswers + wrongAnswers > 0) ? 
                     ((correctAnswers / (correctAnswers + wrongAnswers)) * 100).toFixed(2) + "%" : "-"
             });
+            updateResultsTable();
         } else {
             results.push({
                 section: currentSection,
@@ -98,13 +112,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 } else {
                     wrongAnswers++;
                 }
-                // Save answer immediately
-                results.push({
-                    section: currentSection,
-                    question: currentQuestion,
-                    correct: correctAnswer,
-                    userAnswer: parseInt(button.id.split('-')[1])
-                });
+                updateResultsTable(); // Update the results table in real-time
                 nextQuestion();
             }
         });
@@ -113,20 +121,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function showResults() {
         testPage.style.display = "none";
         resultPage.style.display = "block";
-
-        const resultsTable = document.getElementById("results-table");
-        resultsTable.innerHTML = "";
-
-        results.forEach(result => {
-            const row = document.createElement("tr");
-            row.innerHTML = `
-                <td>${result.section}</td>
-                <td>${result.correct}</td>
-                <td>${result.wrong}</td>
-                <td>${result.accuracy}</td>
-            `;
-            resultsTable.appendChild(row);
-        });
+        updateResultsTable();
     }
 
     startTestButton.onclick = () => {
