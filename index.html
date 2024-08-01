@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIMULASI TES GANJIL GENAP STIS</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="start-page" class="page">
+        <h1>Tes Ganjil-Genap</h1>
+        <input type="text" id="full-name" placeholder="Nama Lengkap">
+        <button id="start-test">Mulai Tes</button>
+    </div>
+
+    <div id="test-page" class="page" style="display: none;">
+        <h1>Tes Ganjil-Genap</h1>
+        <div id="section-number">Bagian ke-1</div>
+        <div id="timer">Sisa waktu: 60 detik</div>
+        <div id="question">1 + 1</div>
+        <div class="answer-buttons">
+            <button id="answer-0" class="answer">0</button>
+            <button id="answer-1" class="answer">1</button>
+        </div>
+        <button id="next-section" class="next">Lanjut ke bagian berikutnya</button>
+        <button id="finish-now" class="finish">Selesaikan sekarang</button>
+        <div class="warning">Peringatan, jangan klik sebelum ada instruksi</div>
+    </div>
+
+    <div id="result-page" class="page" style="display: none;">
+        <h1>Hasil Tes</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Bagian</th>
+                    <th>Benar</th>
+                    <th>Salah</th>
+                    <th>Akurasi</th>
+                </tr>
+            </thead>
+            <tbody id="results-table"></tbody>
+        </table>
+        <button id="retry" class="retry">Coba Lagi</button>
+        <div>Hasil anda tidak akan tersimpan, harap melakukan screenshot sebelum klik coba lagi</div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
