@@ -86,8 +86,3 @@ th {
     color: white;
 }
 
-/* Tambahkan ini untuk memusatkan halaman tes secara vertikal */
-#test-page {
-    margin-top: auto;
-    margin-bottom: auto;
-}
