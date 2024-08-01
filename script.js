@@ -40,8 +40,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function generateQuestion() {
-        const num1 = Math.floor(Math.random() * 10);
-        const num2 = Math.floor(Math.random() * 10);
+        const num1 = Math.floor(Math.random() * 9) + 1;
+        const num2 = Math.floor(Math.random() * 9) + 1;
         questionDisplay.textContent = `${num1} + ${num2}`;
         return (num1 + num2) % 2;
     }
