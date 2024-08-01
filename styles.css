@@ -67,17 +67,17 @@ th {
 }
 
 .retry {
-    background-color: #228B22; /* Warna hijau lebih kalem */
+    background-color: #66bb6a; /* Warna hijau lebih kalem */
     color: white;
 }
 
 .finish {
-    background-color: #FF6347; /* Warna merah lebih kalem */
+    background-color: #ff9999; /* Warna merah lebih kalem */
     color: white;
 }
 
 .next {
-    background-color: #FFD700; /* Warna kuning lebih kalem */
+    background-color: #ffeb3b; /* Warna kuning lebih kalem */
 }
 
 #start-test {
