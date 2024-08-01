@@ -1,122 +1,131 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const startScreen = document.getElementById('start-screen');
-    const testScreen = document.getElementById('test-screen');
-    const resultScreen = document.getElementById('result-screen');
-    const startButton = document.getElementById('start-button');
-    const nextSectionButton = document.getElementById('next-section-button');
-    const finishButton = document.getElementById('finish-button');
-    const retryButton = document.getElementById('retry-button');
-    const fullNameInput = document.getElementById('full-name');
-    const resultName = document.getElementById('result-name');
-    const timerElement = document.getElementById('timer');
-    const questionElement = document.getElementById('question');
-    const answerButtons = Array.from(document.getElementsByClassName('answer-button'));
-    const resultTableBody = document.querySelector('#result-table tbody');
+document.addEventListener("DOMContentLoaded", () => {
+    const namaInput = document.getElementById('nama-lengkap');
+    const mulaiTesBtn = document.getElementById('mulai-tes-btn');
+    const lanjutBtn = document.getElementById('lanjut-btn');
+    const selesaiBtn = document.getElementById('selesai-btn');
+    const cobaLagiBtn = document.getElementById('coba-lagi-btn');
+    const soalText = document.getElementById('soal');
+    const timerText = document.getElementById('waktu');
+    const bagianText = document.getElementById('bagian-num');
+    const hasilTableBody = document.querySelector('#hasil-table tbody');
+    
+    let bagian = 1;
+    let waktuSisa = 60;
+    let soalIndex = 0;
+    let benarCount = 0;
+    let salahCount = 0;
+    let hasilData = [];
+    let timerInterval;
 
-    let currentSection = 1;
-    let currentQuestion = 0;
-    let correctAnswers = 0;
-    let wrongAnswers = 0;
-    let timer;
-    let testName;
+    const jawabanBtns = document.querySelectorAll('.jawaban-btn');
+
+    function tampilkanHalaman(halamanId) {
+        document.querySelectorAll('.page').forEach(page => {
+            page.style.display = 'none';
+        });
+        document.getElementById(halamanId).style.display = 'flex';
+    }
+
+    function resetTest() {
+        bagian = 1;
+        soalIndex = 0;
+        benarCount = 0;
+        salahCount = 0;
+        hasilData = [];
+        waktuSisa = 60;
+        clearInterval(timerInterval);
+    }
 
     function startTimer() {
-        let timeLeft = 60;
-        timerElement.textContent = `Sisa waktu: ${timeLeft} detik`;
-        timer = setInterval(() => {
-            timeLeft--;
-            timerElement.textContent = `Sisa waktu: ${timeLeft} detik`;
-            if (timeLeft <= 0) {
-                nextSection();
+        clearInterval(timerInterval);
+        timerInterval = setInterval(() => {
+            waktuSisa--;
+            timerText.textContent = waktuSisa;
+            if (waktuSisa <= 0) {
+                lanjutKeBagianBerikutnya();
             }
         }, 1000);
     }
 
-    function stopTimer() {
-        clearInterval(timer);
-    }
+    function generateSoal() {
+        const angka1 = Math.floor(Math.random() * 10);
+        const angka2 = Math.floor(Math.random() * 10);
+        const hasil = angka1 + angka2;
+        const kunciJawaban = hasil % 2 === 0 ? '0' : '1';
+        soalText.textContent = `${angka1} + ${angka2} = ?`;
 
-    function generateQuestion() {
-        const num1 = Math.floor(Math.random() * 10);
-        const num2 = Math.floor(Math.random() * 10);
-        const answer = (num1 + num2) % 2;
-        questionElement.textContent = `${num1} + ${num2} = ?`;
-        return answer;
-    }
-
-    function nextQuestion() {
-        currentQuestion++;
-        if (currentQuestion > 100) {
-            nextSection();
-            return;
-        }
-        const correctAnswer = generateQuestion();
-        answerButtons.forEach(button => {
-            button.onclick = () => {
-                if (parseInt(button.getAttribute('data-answer')) === correctAnswer) {
-                    correctAnswers++;
+        jawabanBtns.forEach(btn => {
+            btn.classList.remove('selected');
+            btn.onclick = () => {
+                if (btn.getAttribute('data-value') === kunciJawaban) {
+                    benarCount++;
                 } else {
-                    wrongAnswers++;
+                    salahCount++;
                 }
-                nextQuestion();
+                soalIndex++;
+                if (soalIndex < 100) {
+                    generateSoal();
+                } else {
+                    lanjutKeBagianBerikutnya();
+                }
             };
         });
     }
 
-    function nextSection() {
-        stopTimer();
-        saveResults();
-        currentSection++;
-        if (currentSection > 50) {
-            showResults();
-            return;
+    function lanjutKeBagianBerikutnya() {
+        hasilData.push({ bagian, benar: benarCount, salah: salahCount, akurasi: (benarCount / (benarCount + salahCount)) * 100 });
+        bagian++;
+        soalIndex = 0;
+        benarCount = 0;
+        salahCount = 0;
+        waktuSisa = 60;
+        if (bagian <= 50) {
+            bagianText.textContent = bagian;
+            generateSoal();
+            startTimer();
+        } else {
+            tampilkanHalaman('halaman-hasil');
+            tampilkanHasil();
         }
-        resetSection();
     }
 
-    function resetSection() {
-        currentQuestion = 0;
-        correctAnswers = 0;
-        wrongAnswers = 0;
-        startTimer();
-        nextQuestion();
+    function tampilkanHasil() {
+        hasilTableBody.innerHTML = '';
+        hasilData.forEach(data => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>Bagian ke-${data.bagian}</td>
+                <td>${data.benar}</td>
+                <td>${data.salah}</td>
+                <td>${data.akurasi.toFixed(2)}%</td>
+            `;
+            hasilTableBody.appendChild(row);
+        });
     }
 
-    function saveResults() {
-        const row = document.createElement('tr');
-        const accuracy = ((correctAnswers / (correctAnswers + wrongAnswers)) * 100).toFixed(2);
-        row.innerHTML = `
-            <td>Bagian ${currentSection}</td>
-            <td>${correctAnswers}</td>
-            <td>${wrongAnswers}</td>
-            <td>${accuracy}%</td>
-        `;
-        resultTableBody.appendChild(row);
-    }
-
-    function showResults() {
-        testScreen.classList.add('hidden');
-        resultScreen.classList.remove('hidden');
-        resultName.textContent = `Nama: ${testName}`;
-    }
-
-    startButton.onclick = () => {
-        testName = fullNameInput.value;
-        if (!testName) {
-            alert('Mohon isi nama lengkap');
-            return;
+    mulaiTesBtn.addEventListener('click', () => {
+        if (namaInput.value.trim() !== '') {
+            tampilkanHalaman('halaman-tes');
+            bagianText.textContent = bagian;
+            generateSoal();
+            startTimer();
+        } else {
+            alert('Mohon masukkan nama lengkap Anda.');
         }
-        startScreen.classList.add('hidden');
-        testScreen.classList.remove('hidden');
-        resetSection();
-    };
+    });
 
-    nextSectionButton.onclick = nextSection;
-    finishButton.onclick = showResults;
-    retryButton.onclick = () => {
-        resultScreen.classList.add('hidden');
-        startScreen.classList.remove('hidden');
-        resultTableBody.innerHTML = '';
-        currentSection = 1;
-    };
+    lanjutBtn.addEventListener('click', lanjutKeBagianBerikutnya);
+
+    selesaiBtn.addEventListener('click', () => {
+        clearInterval(timerInterval);
+        tampilkanHalaman('halaman-hasil');
+        tampilkanHasil();
+    });
+
+    cobaLagiBtn.addEventListener('click', () => {
+        resetTest();
+        tampilkanHalaman('halaman-awal');
+    });
+
+    tampilkanHalaman('halaman-awal');
 });
