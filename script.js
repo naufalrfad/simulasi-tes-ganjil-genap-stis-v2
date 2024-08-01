@@ -45,6 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function nextSection() {
+        clearInterval(timer); // Berhenti timer saat beralih ke bagian berikutnya
         results.push({
             section: currentSection,
             correct: correctAnswers,
