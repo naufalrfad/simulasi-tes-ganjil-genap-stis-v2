@@ -84,3 +84,7 @@ th {
     background-color: blue;
     color: white;
 }
+
+#question {
+    font-size: 2em; /* Atur ukuran font sesuai kebutuhan */
+}
