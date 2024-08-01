@@ -61,6 +61,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 accuracy: (correctAnswers + wrongAnswers > 0) ? 
                     ((correctAnswers / (correctAnswers + wrongAnswers)) * 100).toFixed(2) + "%" : "-"
             });
+        } else {
+            results.push({
+                section: currentSection,
+                correct: 0,
+                wrong: 0,
+                accuracy: "-"
+            });
         }
 
         if (currentSection >= 50) {
