@@ -59,13 +59,13 @@ document.addEventListener("DOMContentLoaded", function () {
     function nextSection() {
         stopTimer();
 
-        results.push({
+        results[currentSection - 1] = {
             section: currentSection,
             correct: correctAnswers,
             wrong: wrongAnswers,
             accuracy: (correctAnswers + wrongAnswers > 0) ? 
                 ((correctAnswers / (correctAnswers + wrongAnswers)) * 100).toFixed(2) + "%" : "-"
-        });
+        };
 
         if (currentSection >= 50) {
             showResults();
