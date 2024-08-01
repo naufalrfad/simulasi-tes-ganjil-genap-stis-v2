@@ -18,6 +18,7 @@ button {
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
+    border: none; /* Hilangkan border pada button */
 }
 
 input {
@@ -66,17 +67,17 @@ th {
 }
 
 .retry {
-    background-color: green;
+    background-color: #228B22; /* Warna hijau lebih kalem */
     color: white;
 }
 
 .finish {
-    background-color: red;
+    background-color: #FF6347; /* Warna merah lebih kalem */
     color: white;
 }
 
 .next {
-    background-color: yellow;
+    background-color: #FFD700; /* Warna kuning lebih kalem */
 }
 
 #start-test {
