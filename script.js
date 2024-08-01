@@ -8,13 +8,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const nextSectionButton = document.getElementById("next-section");
     const retryButton = document.getElementById("retry");
 
-    const fullNameInput = document.getElementById("full-name");
     const timerDisplay = document.getElementById("timer");
     const sectionNumberDisplay = document.getElementById("section-number");
     const questionDisplay = document.getElementById("question");
     const answerButtons = document.querySelectorAll(".answer");
 
-    let fullName = "";
     let currentSection = 1;
     let currentQuestion = 0;
     let correctAnswers = 0;
@@ -115,17 +113,13 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    startTestButton.onclick = () => {
-        fullName = fullNameInput.value;
-        if (fullName) {
-            startPage.style.display = "none";
-            testPage.style.display = "block";
-            startTimer(60);
-            nextQuestion();
-        } else {
-            alert("Harap isi nama lengkap Anda.");
-        }
-    };
+startTestButton.onclick = () => {
+    // Langsung pindah ke halaman tes, mulai timer dan pertanyaan
+    startPage.style.display = "none";
+    testPage.style.display = "block";
+    startTimer(60);
+    nextQuestion();
+};
 
     finishNowButton.onclick = () => {
         stopTimer();
