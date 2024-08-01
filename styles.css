@@ -6,34 +6,80 @@ body {
 }
 
 .page {
-    display: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
 }
 
-h1, h2 {
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+input {
+    padding: 10px;
+    font-size: 16px;
+    margin-top: 20px;
+    width: 200px;
+}
+
+#timer, #question, .warning {
     margin-top: 20px;
 }
 
-input, button {
-    margin: 10px;
+.answer-buttons {
+    margin-top: 20px;
+}
+
+.answer {
+    padding: 10px 20px;
+    font-size: 20px;
+    margin: 5px;
+    cursor: pointer;
 }
 
 table {
-    margin: 0 auto;
+    margin: 20px auto;
     border-collapse: collapse;
     width: 80%;
     max-width: 600px;
-}
-
-table, th, td {
-    border: 1px solid black;
+    text-align: center;
 }
 
 th, td {
-    padding: 10px;
-    text-align: center;
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+th {
+    background-color: #f2f2f2;
 }
 
 .warning {
     color: red;
     font-size: 12px;
+    margin-top: 10px;
+}
+
+.retry {
+    background-color: green;
+    color: white;
+}
+
+.finish {
+    background-color: red;
+    color: white;
+}
+
+.next {
+    background-color: yellow;
+}
+
+#start-test {
+    background-color: blue;
+    color: white;
 }
