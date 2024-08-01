@@ -48,41 +48,24 @@ document.addEventListener("DOMContentLoaded", function () {
         return (num1 + num2) % 2;
     }
 
-    function updateResultsTable() {
-        const resultsTable = document.getElementById("results-table");
-        resultsTable.innerHTML = "";
-        results.forEach(result => {
-            const row = document.createElement("tr");
-            row.innerHTML = `
-                <td>${result.section}</td>
-                <td>${result.correct}</td>
-                <td>${result.wrong}</td>
-                <td>${result.accuracy}</td>
-            `;
-            resultsTable.appendChild(row);
-        });
+    function recordAnswer(isCorrect) {
+        if (isCorrect) {
+            correctAnswers++;
+        } else {
+            wrongAnswers++;
+        }
     }
 
     function nextSection() {
-        stopTimer(); 
+        stopTimer();
 
-        if (currentQuestion > 0) {
-            results.push({
-                section: currentSection,
-                correct: correctAnswers,
-                wrong: wrongAnswers,
-                accuracy: (correctAnswers + wrongAnswers > 0) ? 
-                    ((correctAnswers / (correctAnswers + wrongAnswers)) * 100).toFixed(2) + "%" : "-"
-            });
-            updateResultsTable();
-        } else {
-            results.push({
-                section: currentSection,
-                correct: 0,
-                wrong: 0,
-                accuracy: "-"
-            });
-        }
+        results.push({
+            section: currentSection,
+            correct: correctAnswers,
+            wrong: wrongAnswers,
+            accuracy: (correctAnswers + wrongAnswers > 0) ? 
+                ((correctAnswers / (correctAnswers + wrongAnswers)) * 100).toFixed(2) + "%" : "-"
+        });
 
         if (currentSection >= 50) {
             showResults();
@@ -107,21 +90,29 @@ document.addEventListener("DOMContentLoaded", function () {
         const correctAnswer = generateQuestion();
         answerButtons.forEach(button => {
             button.onclick = () => {
-                if (parseInt(button.id.split('-')[1]) === correctAnswer) {
-                    correctAnswers++;
-                } else {
-                    wrongAnswers++;
-                }
-                updateResultsTable(); // Update the results table in real-time
+                recordAnswer(parseInt(button.id.split('-')[1]) === correctAnswer);
                 nextQuestion();
-            }
+            };
         });
     }
 
     function showResults() {
         testPage.style.display = "none";
         resultPage.style.display = "block";
-        updateResultsTable();
+
+        const resultsTable = document.getElementById("results-table");
+        resultsTable.innerHTML = "";
+
+        results.forEach(result => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${result.section}</td>
+                <td>${result.correct}</td>
+                <td>${result.wrong}</td>
+                <td>${result.accuracy}</td>
+            `;
+            resultsTable.appendChild(row);
+        });
     }
 
     startTestButton.onclick = () => {
@@ -134,7 +125,7 @@ document.addEventListener("DOMContentLoaded", function () {
         } else {
             alert("Harap isi nama lengkap Anda.");
         }
-    }
+    };
 
     finishNowButton.onclick = showResults;
 
@@ -142,7 +133,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     retryButton.onclick = () => {
         location.reload();
-    }
+    };
 
     fullNameInput.addEventListener("keypress", function (e) {
         if (e.key === "Enter") {
