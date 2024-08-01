@@ -3,6 +3,10 @@ body {
     text-align: center;
     margin: 0;
     padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
 .page {
@@ -10,7 +14,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    width: 100%;
 }
 
 button {
@@ -18,7 +22,8 @@ button {
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
-    border: none; /* Hilangkan border pada button */
+    border: none;
+    border-radius: 5px;
 }
 
 input {
@@ -41,6 +46,7 @@ input {
     font-size: 20px;
     margin: 5px;
     cursor: pointer;
+    border-radius: 5px;
 }
 
 table {
@@ -86,3 +92,8 @@ th {
     color: white;
 }
 
+/* Tambahkan ini untuk memusatkan halaman tes secara vertikal */
+#test-page {
+    margin-top: auto;
+    margin-bottom: auto;
+}
