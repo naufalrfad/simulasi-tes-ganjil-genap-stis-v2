@@ -51,12 +51,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function nextSection() {
         stopTimer();  // Stop the current timer when moving to the next section
-        results.push({
-            section: currentSection,
-            correct: correctAnswers,
-            wrong: wrongAnswers,
-            accuracy: ((correctAnswers / (correctAnswers + wrongAnswers)) * 100).toFixed(2) + "%"
-        });
+
+        // Save results only if questions were answered
+        if (currentQuestion > 0) {
+            results.push({
+                section: currentSection,
+                correct: correctAnswers,
+                wrong: wrongAnswers,
+                accuracy: (correctAnswers + wrongAnswers > 0) ? 
+                    ((correctAnswers / (correctAnswers + wrongAnswers)) * 100).toFixed(2) + "%" : "-"
+            });
+        }
 
         if (currentSection >= 50) {
             showResults();
