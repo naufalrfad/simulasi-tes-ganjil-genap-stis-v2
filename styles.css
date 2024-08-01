@@ -1,94 +1,126 @@
-body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background-color: #f0f0f0;
+/* Reset CSS */
+* {
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
-.hidden {
-    display: none;
-}
-
-h1 {
-    margin: 20px 0;
-}
-
-#start-screen, #test-screen, #result-screen {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-input[type="text"] {
-    padding: 10px;
-    font-size: 16px;
-    margin-bottom: 20px;
-    width: 80%;
     box-sizing: border-box;
 }
 
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+.page {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100vh;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.judul {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+input[type="text"],
 button {
+    margin-bottom: 10px;
     padding: 10px 20px;
     font-size: 16px;
-    margin: 10px;
+    border: none;
+    border-radius: 4px;
     cursor: pointer;
 }
 
-#start-button {
-    background-color: blue;
-    color: white;
-    border: none;
+input[type="text"] {
+    width: 100%;
 }
 
-.answer-button {
-    padding: 20px;
+button {
+    background-color: #3498db;
+    color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+#timer {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+#soal {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.jawaban {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.jawaban-btn {
+    padding: 15px 30px;
     font-size: 24px;
-    width: 60px;
-    height: 60px;
-    margin: 10px;
-}
-
-#next-section-button {
-    background-color: yellow;
-    color: black;
+    background-color: #2ecc71;
+    color: #fff;
     border: none;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
-.finish-button {
-    background-color: red;
-    color: white;
-    border: none;
+.jawaban-btn:hover {
+    background-color: #27ae60;
 }
 
-.retry-button {
-    background-color: green;
-    color: white;
-    border: none;
-}
-
-.warning {
+.peringatan {
+    font-size: 14px;
     color: red;
-    font-size: 12px;
     margin-top: 10px;
 }
 
-table {
+#hasil-table {
     width: 100%;
-    margin-top: 20px;
     border-collapse: collapse;
+    margin-top: 20px;
 }
 
-th, td {
-    border: 1px solid black;
+#hasil-table th,
+#hasil-table td {
     padding: 10px;
+    border: 1px solid #ccc;
 }
 
-thead {
-    background-color: #ddd;
+#coba-lagi-btn {
+    background-color: #2ecc71;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+#coba-lagi-btn:hover {
+    background-color: #27ae60;
+}
+
+.disclaimer {
+    font-size: 12px;
+    margin-top: 10px;
+    color: #777;
 }
