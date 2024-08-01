@@ -22,6 +22,11 @@ document.addEventListener("DOMContentLoaded", function () {
     let timer;
     let results = [];
 
+    // Function to stop the current timer
+    function stopTimer() {
+        clearInterval(timer);
+    }
+
     function startTimer(duration) {
         let timeRemaining = duration;
         timerDisplay.textContent = `Sisa waktu: ${timeRemaining} detik`;
@@ -45,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function nextSection() {
-        clearInterval(timer); // Berhenti timer saat beralih ke bagian berikutnya
+        stopTimer();  // Stop the current timer when moving to the next section
         results.push({
             section: currentSection,
             correct: correctAnswers,
